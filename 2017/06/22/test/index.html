@@ -1,4 +1,61 @@
-<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description"><meta name="keywords" content="Hexo, javascript, Nodejs, Reactjs, Vuejs"><title>Vue小记 - Me|18</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="http://me18.cn/vue-blog"><span>vue-blog</span></a></li><li><a href="http://me18.cn/react-blog"><span>react-blog</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">Vue小记</h1><ul class="meta"><li><i class="icon icon-author"></i>Liu Le</li><li><i class="icon icon-clock"></i>0 Minutes</li><li><i class="icon icon-calendar"></i>June 22, 2017</li></ul></div></div><div class="article-content" style="max-width:800px"><h2 id="最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。"><a href="#最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。" class="headerlink" title="最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。"></a>最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。</h2></div><div class="article-meta" style="max-width:800px"></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cj48kvj9j0001lgub5927uqat" data-title="Vue小记" data-url="http://me18.cn/2017/06/22/test/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description"><meta name="keywords" content="Hexo, javascript, Nodejs, Reactjs, Vuejs"><title>Vue小记 - Me|18</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="http://me18.cn/vue-blog"><span>vue-blog</span></a></li><li><a href="http://me18.cn/react-blog"><span>react-blog</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">Vue小记</h1><ul class="meta"><li><i class="icon icon-author"></i>Liu Le</li><li><i class="icon icon-clock"></i>2 Minutes</li><li><i class="icon icon-calendar"></i>June 22, 2017</li></ul></div></div><div class="article-content" style="max-width:800px"><h3 id="最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。一年了感觉自己还是只学到个前端的皮毛，难也！"><a href="#最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。一年了感觉自己还是只学到个前端的皮毛，难也！" class="headerlink" title="最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。一年了感觉自己还是只学到个前端的皮毛，难也！"></a>最近一直在搞Vue开发，但是需求老是在变，一会儿要定制化的一面，一会儿又是要动态表单，搞得真的很头疼。一年了感觉自己还是只学到个前端的皮毛，难也！</h3><h3 id="不过这些天的研究对Vue也算越来越熟悉了。"><a href="#不过这些天的研究对Vue也算越来越熟悉了。" class="headerlink" title="不过这些天的研究对Vue也算越来越熟悉了。"></a>不过这些天的研究对Vue也算越来越熟悉了。</h3><h3 id="今天就解决了之前的两个疑问。"><a href="#今天就解决了之前的两个疑问。" class="headerlink" title="今天就解决了之前的两个疑问。"></a>今天就解决了之前的两个疑问。</h3><ol>
+<li><p>Vue父组件调用子组件定义的方法</p>
+<pre><code>&lt;Child ref=&apos;child&apos;&gt;&lt;/Child&gt;
+&lt;script&gt;
+    export default {
+        name:&apos;parent&apos;,
+        methods:{
+            showChildMethod(){
+                this.$refs.child.test(&apos;我调用了子组件的方法哦&apos;);    //父调用子方法，并可传递参数。
+            }
+        }
+    }
+
+&lt;/script&gt;
+
+//子组件
+&lt;script&gt;
+    export default {
+        name:&apos;child&apos;,
+        methods:{
+            test(params){
+                console.log(params)
+            }
+        }
+    }
+
+&lt;/script&gt;
+</code></pre></li>
+<li><p>Vue子组件改变父组件的方法（其实官方时不推荐这种方式，因为这违背了数据的单向流动原则，推荐用Vuex做状态管理。但是Vuex在表单绑定V-model会有问题。所以，有时候还是必须用到的，嘻嘻）</p>
+<pre><code>&lt;Child ref=&apos;child&apos; @childToParent=&apos;change&apos;&gt;&lt;/Child&gt;
+&lt;script&gt;
+    export default {
+        name:&apos;parent&apos;,
+        methods:{
+            change(params){
+                console.log(&apos;我收到了子组件的传值&apos;+params)
+                //可以在这里改变状态
+            }
+        }
+    }
+
+&lt;/script&gt;
+
+//子组件
+&lt;script&gt;
+    export default {
+        name:&apos;child&apos;,
+        methods:{
+            test(params){
+                this.$emit(&apos;childToParent&apos;,params)  //向父组件通信
+            }
+        }
+    }
+
+&lt;/script&gt;
+</code></pre></li>
+</ol>
+<h3 id="这个世界有太多不如意，可你的生活还是要继续。希望每天都能记下一点知识点，日积月累，也许能离自己前端大牛的目标更近一点呢。哈哈哈，也许我想多了。"><a href="#这个世界有太多不如意，可你的生活还是要继续。希望每天都能记下一点知识点，日积月累，也许能离自己前端大牛的目标更近一点呢。哈哈哈，也许我想多了。" class="headerlink" title="这个世界有太多不如意，可你的生活还是要继续。希望每天都能记下一点知识点，日积月累，也许能离自己前端大牛的目标更近一点呢。哈哈哈，也许我想多了。"></a>这个世界有太多不如意，可你的生活还是要继续。希望每天都能记下一点知识点，日积月累，也许能离自己前端大牛的目标更近一点呢。哈哈哈，也许我想多了。</h3></div><div class="article-meta" style="max-width:800px"></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cj48l31g80001npublxtsce6e" data-title="Vue小记" data-url="http://me18.cn/2017/06/22/test/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
 var duoshuoQuery = {short_name: siteName};
 (function() {
   var ds = document.createElement('script');
