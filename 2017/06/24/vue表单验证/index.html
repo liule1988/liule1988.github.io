@@ -10,7 +10,10 @@
 
     <!--Description-->
     
-        <meta name="description" content="Vue真是折磨人啊，今天搞起Vue的表单验证，搞了个漂亮的主题，哈哈 还是明天再写吧，睡咯，晚安">
+        <meta name="description" content="1. Element
+这两天要完成Vue的表单验证功能，我用的是饿了么团队的Element，所以，首次尝试的就是Element自带的表单验证功能。
+
+&amp;lt;el-form :model=&amp;quot;ruleForm&amp;quot; :rules=&amp;quot;rules&amp;quot; ref=&amp;quo">
     
 
     <!--Author-->
@@ -125,7 +128,59 @@
                     
 
                     <!-- Main Post Content -->
-                    <h3 id="Vue真是折磨人啊，今天搞起Vue的表单验证，搞了个漂亮的主题，哈哈-还是明天再写吧，睡咯，晚安"><a href="#Vue真是折磨人啊，今天搞起Vue的表单验证，搞了个漂亮的主题，哈哈-还是明天再写吧，睡咯，晚安" class="headerlink" title="Vue真是折磨人啊，今天搞起Vue的表单验证，搞了个漂亮的主题，哈哈 还是明天再写吧，睡咯，晚安"></a>Vue真是折磨人啊，今天搞起Vue的表单验证，搞了个漂亮的主题，哈哈 还是明天再写吧，睡咯，晚安</h3>
+                    <h3 id="1-Element"><a href="#1-Element" class="headerlink" title="1. Element"></a>1. Element</h3><blockquote>
+<p>这两天要完成Vue的表单验证功能，我用的是饿了么团队的Element，所以，首次尝试的就是Element自带的表单验证功能。</p>
+</blockquote>
+<pre><code>&lt;el-form :model=&quot;ruleForm&quot; :rules=&quot;rules&quot; ref=&quot;ruleForm&quot; label-width=&quot;100px&quot; class=&quot;demo-ruleForm&quot;&gt;
+      &lt;el-form-item label=&quot;活动名称&quot; prop=&quot;name&quot;&gt;
+            &lt;el-input v-model=&quot;ruleForm.name&quot;&gt;&lt;/el-input&gt;
+  &lt;/el-form-item&gt;
+  &lt;el-form-item label=&quot;活动区域&quot; prop=&quot;region&quot;&gt;
+        &lt;el-select v-model=&quot;ruleForm.region&quot; placeholder=&quot;请选择活动区域&quot;&gt;
+      &lt;el-option label=&quot;区域一&quot; value=&quot;shanghai&quot;&gt;&lt;/el-option&gt;
+      &lt;el-option label=&quot;区域二&quot; value=&quot;beijing&quot;&gt;&lt;/el-option&gt;
+    &lt;/el-select&gt;
+  &lt;/el-form-item&gt;
+  &lt;/el-form
+</code></pre><p> 上面就是Element给的例子，在form标签里加上验证规则‘:rules=rules’,rules统一写在数据里，每个表单项需要加验证规则，就在prop属性等于规则里的key，这个key必须与所绑定的数据key相同。如下：</p>
+<pre><code>rules: {
+        name: [
+            { required: true, message: &apos;请输入活动名称&apos;, trigger: &apos;blur&apos; },
+            { min: 3, max: 5, message: &apos;长度在 3 到 5 个字符&apos;, trigger: &apos;blur&apos; }
+        ],
+        region: [
+            { required: true, message: &apos;请选择活动区域&apos;, trigger: &apos;change&apos; }
+        ],
+        date1: [
+            { type: &apos;date&apos;, required: true, message: &apos;请选择日期&apos;, trigger: &apos;change&apos; }
+        ],
+        date2: [
+            { type: &apos;date&apos;, required: true, message: &apos;请选择时间&apos;, trigger: &apos;change&apos; }
+        ],
+        type: [
+            { type: &apos;array&apos;, required: true, message: &apos;请至少选择一个活动性质&apos;, trigger: &apos;change&apos; }
+        ],
+        resource: [
+            { required: true, message: &apos;请选择活动资源&apos;, trigger: &apos;change&apos; }
+        ],
+        desc: [
+            { required: true, message: &apos;请填写活动形式&apos;, trigger: &apos;blur&apos; }
+        ]
+        }
+</code></pre><p> 这种验证写法好处是，验证规则统一写在一起，只需在表单项上声明是否需要验证，但是，每个控件多验证规则都需要分别写，代码冗余度很高，我接下来要说的两个插件也都有类似的问题。另外，必须要有 <code>&lt;el-form-item&gt;&lt;/el-form-item&gt;</code>才能用它的验证规则，有时候还是挺不方便的。</p>
+<h3 id="2-Vue-validator"><a href="#2-Vue-validator" class="headerlink" title="2. Vue-validator"></a>2. Vue-validator</h3><blockquote>
+<p>这个好像是官方推荐的验证插件，奈何3.0.0版本只支持vue-2.0到vue-2.2之间的，而我使用的恰巧又是vue-2.3.3的版本，着实尴尬。</p>
+</blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;validator name=&quot;validation&quot;&gt;</div><div class="line">    &lt;input type=&quot;text&quot; v-model=&apos;comment&apos; id=&apos;comment&apos; v-validate:comment=&quot;&#123; minlength: 3, maxlength: 15 &#125;&quot;&gt;</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;span v-show=&quot;$validation.comment.minlength&quot;&gt;不得少于3个字符&lt;/span&gt;</div><div class="line">      &lt;span v-show=&quot;$validation.comment.maxlength&quot;&gt;不得大于15个字符&lt;/span&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line"> &lt;/validator&gt;</div></pre></td></tr></table></figure>
+<p>  由于不支持Vue版本，因此我没有实际使用这个插件，可以看下这个介绍<a href="http://www.cnblogs.com/jyichen/p/5660886.html" target="_blank" rel="external">vue-validator的使用</a></p>
+<h3 id="3-Vee-validate"><a href="#3-Vee-validate" class="headerlink" title="3. Vee-validate"></a>3. Vee-validate</h3><blockquote>
+<p>看下基础使用吧</p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  div class=&quot;column is-12&quot;&gt;</div><div class="line">    &lt;label class=&quot;label&quot; for=&quot;email&quot;&gt;Email&lt;/label&gt;</div><div class="line">    &lt;p class=&quot;control&quot;&gt;</div><div class="line">        &lt;input v-validate data-rules=&quot;required|email&quot; :class=&quot;&#123;&apos;input&apos;: true, &apos;is-danger&apos;: errors.has(&apos;email&apos;) &#125;&quot; name=&quot;email&quot; type=&quot;text&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">        &lt;span v-show=&quot;errors.has(&apos;email&apos;)&quot; class=&quot;help is-danger&quot;&gt;&#123;&#123; errors.first(&apos;email&apos;) &#125;&#125;&lt;/span&gt;</div><div class="line">    &lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>  提醒：错误信息里面的名称通常就是表单的name属性，除非是通过Vue实例传递进来的。<br>提醒：养成好习惯，给每个field添加name属性，如果没有name属性又没有对值进行绑定的话，validator可能不会对其进行正确的校验.<br> 可以看看这篇<a href="http://www.cnblogs.com/xxwang/p/6104715.html" target="_blank" rel="external">vee-validate使用介绍</a></p>
+<hr>
+<p>  其实表单验证可能还是需要定制化，这种验证规则没有在更高层抽象出来，所以，每条验证规则还需要自己写，有机会，我也学学怎么写插件吧。加油。</p>
+
                     
                     <!-- Tags Bottom -->
                     
@@ -161,7 +216,7 @@
                     <!-- Widget 2: Categories -->
                     
                         <div class="mt5 tc tl-l">
-    <h3>分类</h3>
+    <h3>Catégories</h3>
     
         <p>
             <a href="/categories/Vue学习笔记/">Vue学习笔记</a>
@@ -175,7 +230,7 @@
 
                     <!-- Widget 3: Recent Posts -->
                     <div class="mt5 tc tl-l">
-    <h3>最近发布</h3>
+    <h3>Récemment</h3>
     
         <p>
             <a href="/2017/06/24/vue表单验证/">vue表单验证</a>
