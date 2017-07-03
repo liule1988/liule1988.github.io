@@ -10,6 +10,15 @@
 
     <!--Description-->
     
+        <meta name="description" content="今天工作上遇到了要在2个兄弟组件之间传递数据的问题，因为，项目还是比较小的，所以也就没有使用vuex做状态管理。
+
+这里使用的是vue中的event-bus，创建一个用于监听和传值的Vue实例。代码如下：
+let bus = new Vue();
+
+//子组件1
+methods:{
+    ">
+    
 
     <!--Author-->
     
@@ -18,7 +27,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Me|18"/>
+        <meta property="og:title" content="vue兄弟组件通信"/>
     
 
     <!--Open Graph Description-->
@@ -29,7 +38,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -40,7 +49,7 @@
 
     <!-- Title -->
     
-    <title>归档: 2017 - Me|18</title>
+    <title>vue兄弟组件通信 - Me|18</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
@@ -68,8 +77,6 @@
 <body>
 
 <!-- Main Content -->
-
-
 <!-- Banner -->
 <!-- Banner -->
 <div class="w-100 bg-1 ph5-ns ph3 text-light">
@@ -104,89 +111,132 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">2017</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns"></p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">vue兄弟组件通信</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2017-07-03</p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa-folder-open"></i>
+        <i class="header-icon fa fa-file-text-o"></i>
     </div>
 </div>
 
+<!-- Content -->
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            
-                <a href="/2017/07/03/vue兄弟组件通信/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">07 2017</span> 
-            
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/vue/">#vue</a> <a class="fw3 ph1 dib" href="/tags/组件通信/">#组件通信</a>
+                            </div>
+                        </div>
+                    
+
+                    <!-- Main Post Content -->
+                    <blockquote>
+<p>今天工作上遇到了要在2个兄弟组件之间传递数据的问题，因为，项目还是比较小的，所以也就没有使用vuex做状态管理。</p>
+</blockquote>
+<p>这里使用的是vue中的event-bus，创建一个用于监听和传值的Vue实例。代码如下：</p>
+<pre><code>let bus = new Vue();
+
+//子组件1
+methods:{
+    addNum(){
+        bus.$emit(&apos;test&apos;,&apos;hehe&apos;);
+    }
+}
+
+//子组件2
+created(){
+    bus.$on(&apos;test&apos;,val =&gt; {
+        console.log(val)
+    })
+}
+</code></pre><p> 明天在公司项目中用用vuex，明晚总结一下。晚安。</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/vue/">#vue</a> <a class="fw3 ph1 dib" href="/tags/组件通信/">#组件通信</a>
+                        </div>
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="/timg.jpeg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="Liu Le">
         </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">vue兄弟组件通信<span>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            追万里山高路远，吾自非等闲<br> 进一步海阔天空，天可随人愿
         </div>
-    </div>
-</a>
-            
-                <a href="/2017/04/26/hello-world/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">04 2017</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">Hello World<span>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2017/06/22/vue小记/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">06 2017</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">Vue小记<span>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2017/06/24/vue表单验证/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">06 2017</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">vue表单验证<span>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2017/07/02/给你的第一封信/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">07 2017</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">给你的第一封信<span>
-        </div>
-    </div>
-</a>
-            
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+                        <div class="mt5 tc tl-l">
+    <h3>分类</h3>
+    
+        <p>
+            <a href="/categories/Vue学习笔记/">Vue学习笔记</a>
+        </p>
+    
+</div>
+
+
+                        <hr class="dn-l mw4 black-50 mt5" />
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>最近发布</h3>
+    
+        <p>
+            <a href="/2017/07/03/vue兄弟组件通信/">vue兄弟组件通信</a>
+        </p>
+    
+        <p>
+            <a href="/2017/07/02/给你的第一封信/">给你的第一封信</a>
+        </p>
+    
+        <p>
+            <a href="/2017/06/24/vue表单验证/">vue表单验证</a>
+        </p>
+    
+        <p>
+            <a href="/2017/06/22/vue小记/">Vue小记</a>
+        </p>
+    
+        <p>
+            <a href="/2017/04/26/hello-world/">Hello World</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 <div class="bg-1 ph2 ph5-ns pv5">
